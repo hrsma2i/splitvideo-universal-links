@@ -43,8 +43,17 @@
         const end = params.get('end');
 
         if (videoId && start && end) {
-            document.getElementById('message').textContent =
-                'SplitVideo アプリがインストールされていない場合は、App Store からダウンロードしてください。';
+            // Build custom URL scheme
+            const customUrl = `splitvideo://play?videoId=${videoId}&start=${start}&end=${end}`;
+
+            // Try to open the app
+            window.location.href = customUrl;
+
+            // Update message after a short delay
+            setTimeout(() => {
+                document.getElementById('message').textContent =
+                    'SplitVideo アプリがインストールされていない場合は、App Store からダウンロードしてください。';
+            }, 2000);
         } else {
             document.getElementById('message').textContent =
                 '無効なパラメータです。videoId, start, end が必要です。';
