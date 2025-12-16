@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SplitVideo - Opening App...</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SplitVideo</h1>
+        <p id="message">アプリを開いています...</p>
+    </div>
+
+    <script>
+        // Get query parameters
+        const params = new URLSearchParams(window.location.search);
+        const videoId = params.get('videoId');
+        const start = params.get('start');
+        const end = params.get('end');
+
+        if (videoId && start && end) {
+            // Build custom URL scheme
+            const customUrl = `splitvideo://play?videoId=${videoId}&start=${start}&end=${end}`;
+
+            // Try to open the app
+            window.location.href = customUrl;
+
+            // Update message after a short delay
+            setTimeout(() => {
+                document.getElementById('message').textContent =
+                    'アプリがインストールされていない場合は、App Store からダウンロードしてください。';
+            }, 2000);
+        } else {
+            document.getElementById('message').textContent =
+                '無効なパラメータです。videoId, start, end が必要です。';
+        }
+    </script>
+</body>
+</html>

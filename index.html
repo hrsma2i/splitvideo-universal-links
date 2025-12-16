@@ -36,34 +36,8 @@
     </div>
 
     <script>
-        // Get current URL path and query parameters
-        const path = window.location.pathname;
-        const params = new URLSearchParams(window.location.search);
-
-        // Check if this is a /play request
-        if (path === '/play') {
-            const videoId = params.get('videoId');
-            const start = params.get('start');
-            const end = params.get('end');
-
-            if (videoId && start && end) {
-                // Build custom URL scheme
-                const customUrl = `splitvideo://play?videoId=${videoId}&start=${start}&end=${end}`;
-
-                // Try to open the app
-                window.location.href = customUrl;
-
-                // Update message
-                document.getElementById('message').textContent =
-                    'アプリがインストールされていない場合は、App Store からダウンロードしてください。';
-            } else {
-                document.getElementById('message').textContent =
-                    '無効なパラメータです。videoId, start, end が必要です。';
-            }
-        } else {
-            document.getElementById('message').textContent =
-                'SplitVideo - YouTube 動画クリップ再生アプリ';
-        }
+        document.getElementById('message').textContent =
+            'SplitVideo - YouTube 動画クリップ再生アプリ';
     </script>
 </body>
 </html>
