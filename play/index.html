@@ -42,9 +42,12 @@
         const start = params.get('start');
         const end = params.get('end');
 
-        if (videoId && start && end) {
+        if (videoId && start) {
             // Build custom URL scheme
-            const customUrl = `splitvideo://play?videoId=${videoId}&start=${start}&end=${end}`;
+            let customUrl = `splitvideo://play?videoId=${videoId}&start=${start}`;
+            if (end) {
+                customUrl += `&end=${end}`;
+            }
 
             // Try to open the app
             window.location.href = customUrl;
@@ -56,7 +59,7 @@
             }, 2000);
         } else {
             document.getElementById('message').textContent =
-                '無効なパラメータです。videoId, start, end が必要です。';
+                '無効なパラメータです。videoId, start が必要です。';
         }
     </script>
 </body>
